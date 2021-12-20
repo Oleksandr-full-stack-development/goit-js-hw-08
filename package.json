@@ -6,9 +6,9 @@
   "homepage": "https://Oleksandr-full-stack-development.github.io/goit-js-hw-08",
   "scripts": {
     "dev": "parcel src/*.html",
-    "build": "parcel build src/*.html --public-url/goit-js-hw-08/"
+    "build": "parcel build src/*.html --public-url /goit-js-hw-08/"
   },
-  "repository": {
+  "repository": {   
     "type": "git",
     "url": "git+https://github.com/goitacademy/parcel-project-template.git"
   },
