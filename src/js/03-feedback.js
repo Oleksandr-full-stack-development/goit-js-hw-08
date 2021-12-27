@@ -16,8 +16,6 @@ refs.form.addEventListener('submit', onFormSubmit);
 
 
 const formData = {
-    email: '',
-    message: '',
 };
 
 loadPage();
