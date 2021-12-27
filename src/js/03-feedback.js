@@ -10,13 +10,17 @@ const LOCALSTORAGE_KEY_FORM = "feedback-form-state";
 
 
 
-
 refs.form.addEventListener('input', throttle(onFormInput,500));
 
 refs.form.addEventListener('submit', onFormSubmit);
 
 
-const formData = {};
+const formData = {
+    email: '',
+    message: '',
+};
+
+loadPage();
 
 function onFormInput(e) {
     formData[e.target.name] = e.target.value;
@@ -25,33 +29,28 @@ function onFormInput(e) {
     
 }
 
+
+
+ 
+function loadPage() {
+    const getItems = localStorage.getItem(LOCALSTORAGE_KEY_FORM);
+    const data = JSON.parse(getItems); 
+        if (data) {
+            formData.email = data.email;
+            formData.message = data.message;
+            refs.form.email.value = formData.email;
+            refs.form.message.value = formData.message;
+        }
+            
+ };
+
+
 function onFormSubmit (e) {
-    e.preventDefault();
-    localStorage.getItem(LOCALSTORAGE_KEY_FORM);
-    e.target.reset();
-    localStorage.removeItem(LOCALSTORAGE_KEY_FORM);
-    console.log(formData);
+    if (formData) {
+        e.preventDefault();
+        e.currentTarget.reset();
+        localStorage.removeItem(LOCALSTORAGE_KEY_FORM);
+        console.log(formData); 
+    }
 }
-  
-
-document.addEventListener("DOMContentLoaded", function() { 
-    document.querySelectorAll('textarea, input').forEach(function(e) {
-
-        // если данные значения уже записаны в sessionStorage, то вставляем их в поля формы
-        // путём этого мы как раз берём данные из памяти браузера, если страница была случайно перезагружена
-
-        if(e.value === '') e.value = localStorage.getItem(e.name, e.value);
-
-        // на событие ввода данных (включая вставку с помощью мыши) вешаем обработчик
-        
-        e.addEventListener('input', function() {
-            
-            // и записываем в sessionStorage данные, в качестве имени используя атрибут name поля элемента ввода
-            
-            localStorage.setItem(e.name, e.value);
-        });
-        
-    })
-    
-}); 
-
+ 
