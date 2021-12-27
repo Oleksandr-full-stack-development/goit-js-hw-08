@@ -44,11 +44,9 @@ function loadPage() {
 
 
 function onFormSubmit (e) {
-    if (formData) {
         e.preventDefault();
         e.currentTarget.reset();
         localStorage.removeItem(LOCALSTORAGE_KEY_FORM);
         console.log(formData); 
-    }
 }
  
